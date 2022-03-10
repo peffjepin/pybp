@@ -146,14 +146,14 @@ class PyProject(BaseProjectPlan):
         template.copy(
             self._TEMPLATE_DIR / "setup.py",
             self.root / "setup.py",
-            {"plan": self},
+            self.namespace,
         )
 
     def _write_setup_cfg(self):
         template.copy(
             self._TEMPLATE_DIR / "setup.cfg",
             self.root / "setup.cfg",
-            {"plan": self},
+            self.namespace,
         )
 
     def _write_manifest(self):
@@ -169,7 +169,7 @@ class PyProject(BaseProjectPlan):
 
         venv_config = config.PersistantUserConfig.get_dict()["venv_cmd"]
         if venv_config == "python3 -m venv":
-            create_venv_command = "python3 -m venv venv" 
+            create_venv_command = "python3 -m venv venv"
         elif venv_config == "virtualenv":
             create_venv_command = "virtualenv venv"
         else:

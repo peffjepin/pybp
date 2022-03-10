@@ -24,7 +24,7 @@ def main():
         plan.setup_prompts()
         plan.execute()
         exit(0)
-    elif args.command == None:
+    elif args.command is None:
         plan = projgen.BaseProjectPlan()
         plan.setup_prompts()
         plan.execute()

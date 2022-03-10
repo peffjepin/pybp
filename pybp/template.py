@@ -82,12 +82,12 @@ def _resolve_conditional_blocks(text: str, namespace: dict) -> List[str]:
 
 def _resolve_eval_blocks(text: str, namespace: dict) -> str:
     return _EVAL_PATTERN.sub(
-        lambda m: expand_eval_block(eval(m.group(1).strip(), {}, namespace)),
+        lambda m: _expand_eval_block(eval(m.group(1).strip(), {}, namespace)),
         text,
     )
 
 
-def expand_eval_block(value) -> str:
+def _expand_eval_block(value) -> str:
     if isinstance(value, str):
         return value
     if isinstance(value, Iterable):
