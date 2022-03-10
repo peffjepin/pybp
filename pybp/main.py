@@ -1,4 +1,4 @@
-import projgen
+from . import projgen
 
 
 def main():

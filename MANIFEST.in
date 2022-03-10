@@ -1,2 +1,1 @@
-recursive-include licenses *
-recursive-include gitignore *
+recursive-include pybp/templates *
