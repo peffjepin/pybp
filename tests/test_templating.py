@@ -34,40 +34,7 @@ def test_template_value_is_not_a_string():
     assert template.render("{{ 1 + v }}", {"v": 3}) == "4"
 
 
-def test_when_conditional_block_is_true():
-    test_text = """
-line 1
-{? val == 1 ?}
-Inside ?block. {{ msg }}.
-{? end ?}
-line 3
-"""
-    namespace = {"val": 1, "msg": "Hello"}
-    expected = """
-line 1
-Inside ?block. Hello.
-line 3
-"""
-    assert template.render(test_text, namespace) == expected
-
-
-def test_when_conditional_block_is_false():
-    test_text = """
-line 1
-{? val == 1 ?}
-Inside ?block. {{ msg }}.
-{? end ?}
-line 3
-"""
-    namespace = {"val": 2, "msg": "Hello"}
-    expected = """
-line 1
-line 3
-"""
-    assert template.render(test_text, namespace) == expected
-
-
-def test_multiline_conditional_when_true():
+def test_conditional_when_true():
     # we shouldnt get extra newlines
     test_text = """
 line 1
@@ -84,7 +51,7 @@ line 3
     assert template.render(test_text) == expected
 
 
-def test_multiline_conditional_when_false():
+def test_conditional_when_false():
     # we shouldnt get extra newlines
     test_text = """
 line 1
