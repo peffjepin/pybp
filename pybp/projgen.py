@@ -167,9 +167,17 @@ class PyProject(BaseProjectPlan):
         if not self.make_venv:
             return
 
+        venv_config = config.PersistantUserConfig.get_dict()["venv_cmd"]
+        if venv_config == "python3 -m venv":
+            create_venv_command = "python3 -m venv venv" 
+        elif venv_config == "virtualenv":
+            create_venv_command = "virtualenv venv"
+        else:
+            create_venv_command = venv_config
+
         commands = [
             f"cd {self.root}",
-            config.PersistantUserConfig().get_dict()["venv_cmd"],
+            create_venv_command,
             ". venv/bin/activate",
         ]
         if self.project_deps:
